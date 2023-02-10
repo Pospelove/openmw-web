@@ -59,8 +59,16 @@ RUN ./vcpkg/vcpkg install collada-dom:wasm32-emscripten
 # RUN ./vcpkg/vcpkg install libjpeg:wasm32-emscripten
 COPY patches/osg/portfile.cmake vcpkg/ports/osg/portfile.cmake
 COPY patches/osg/vcpkg.json vcpkg/ports/osg/vcpkg.json
-CMD ./vcpkg/vcpkg install osg:wasm32-emscripten
-COPY overlay_ports/ ./overlay_ports/
+
+COPY CMakeLists.txt CMakeLists.txt
+COPY src src
+RUN mkdir build \
+    && cd build \
+    && cmake .. \
+    && cmake --build .
+
+#CMD ./vcpkg/vcpkg install osg:wasm32-emscripten
+#COPY overlay_ports/ ./overlay_ports/
 
 
 # RUN ./vcpkg/vcpkg install boost-winapi:wasm32-emscripten \
