@@ -17,6 +17,9 @@ endif()
 cmake_minimum_required(VERSION 3.15)
 project(openmw_web)
 
+# use opengl
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -s USE_WEBGL2=1")
+
 find_package(Boost REQUIRED)
 
 file(GLOB_RECURSE src src/boost_hello_world/*)
@@ -26,3 +29,17 @@ target_link_libraries(boost_hello_world PRIVATE Boost::boost)
 
 # change suffix to .html
 set_target_properties(boost_hello_world PROPERTIES SUFFIX ".html")
+
+# find opengl
+find_package(OpenGL REQUIRED)
+
+file(GLOB_RECURSE src src/opengl_hello_world/*)
+add_executable(opengl_hello_world ${src})
+
+# link opengl (seems to use emscripten's opengl not vcpkg's)
+target_link_libraries(opengl_hello_world PRIVATE ${OPENGL_LIBRARIES})
+target_include_directories(opengl_hello_world PRIVATE ${OPENGL_INCLUDE_DIR})
+
+
+# change suffix to .html
+set_target_properties(opengl_hello_world PROPERTIES SUFFIX ".html")
