@@ -23,3 +23,6 @@ file(GLOB_RECURSE src src/boost_hello_world/*)
 add_executable(boost_hello_world ${src})
 
 target_link_libraries(boost_hello_world PRIVATE Boost::boost)
+
+# change suffix to .html
+set_target_properties(boost_hello_world PROPERTIES SUFFIX ".html")

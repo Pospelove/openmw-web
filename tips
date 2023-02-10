@@ -19,3 +19,9 @@ docker run openmwweb ls vcpkg/installed/wasm32-emscripten/debug/lib
 # brotli - 342s
 # expat - 169s
 # bzip2 - 72s
+
+# command to get emswcripten built files to host filesystem:
+# ./get.sh
+
+# command to run web server for built emscripten files:
+# npx http-server build
