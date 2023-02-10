@@ -1,6 +1,11 @@
 docker run openmwweb
 docker run -v $(pwd)/boost-exception:/openmw-web/vcpkg/buildtrees/boost-exception/ openmwweb
 docker run --rm -v $(pwd)/boost-filesystem:/openmw-web/vcpkg/buildtrees/boost-filesystem/ openmwweb
+docker run --rm -v $(pwd)/boost-atomic:/openmw-web/vcpkg/buildtrees/boost-atomic/ openmwweb
+docker run --rm -v $(pwd)/liblzma:/openmw-web/vcpkg/buildtrees/liblzma/ openmwweb
+docker run --rm -v $(pwd)/pcre:/openmw-web/vcpkg/buildtrees/pcre/ openmwweb
+docker run --rm -v $(pwd)/collada-dom:/openmw-web/vcpkg/buildtrees/collada-dom/ openmwweb
+docker run --rm -v $(pwd)/osg:/openmw-web/vcpkg/buildtrees/osg/ openmwweb
 
 
 # to prove that under Emscripten lib prefix is still "lib" and suffix is ".a"

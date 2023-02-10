@@ -7,154 +7,80 @@ RUN apt-get update -y \
         autoconf \
         automake \
         libtool \
-        pkg-config
+        pkg-config \
+        bison
 
  RUN mkdir vcpkg \
      && cd vcpkg \
      && git init \
-     && git remote add pospelove https://github.com/Pospelove/vcpkg.git \
-     && git fetch --depth=1 pospelove 31c8367c9f6b34fbf1614be1f399e605bee00269 \
+     && git remote add pospelove https://github.com/Microsoft/vcpkg.git \
+     && git fetch --depth=1 pospelove 1c48ec7f49d69bb753e6afefba51368e18263255 \
      && git checkout FETCH_HEAD \
      && ./bootstrap-vcpkg.sh
 
-COPY overlay_ports/ ./overlay_ports/
 COPY patches/brotli/portfile.cmake vcpkg/ports/brotli/portfile.cmake
-
-RUN ./vcpkg/vcpkg install boost-algorithm[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-align[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-array[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-asio[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-assert[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-bind[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-build[core]:x64-linux
-RUN ./vcpkg/vcpkg install boost-chrono[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-concept-check[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-config[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-container[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-container-hash[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-conversion[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-core[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-date-time[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-describe[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-detail[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-exception[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-function[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-function-types[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-functional[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-fusion[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-integer[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-intrusive[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-io[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-iterator[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-lexical-cast[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-logic[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-modular-build-helper[core]:x64-linux
-RUN ./vcpkg/vcpkg install boost-move[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-mp11[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-mpl[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-numeric-conversion[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-optional[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-predef[core]:wasm32-emscripten
-
-RUN ./vcpkg/vcpkg install boost-preprocessor[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-range[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-ratio[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-rational[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-regex[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-smart-ptr[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-static-assert[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-system[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-throw-exception[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-tokenizer[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-tuple[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-type-index[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-type-traits[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-typeof[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-uninstall[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-uninstall[core]:x64-linux
-RUN ./vcpkg/vcpkg install boost-unordered[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-utility[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-variant2[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-vcpkg-helpers[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install boost-winapi[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install brotli[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install bullet3[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install bzip2[core,tool]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install curl[core,non-http,openssl,ssl]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install dirent[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install egl-registry[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install expat[core]:wasm32-emscripten
-
-
 COPY patches/ffmpeg/portfile.cmake vcpkg/ports/ffmpeg/portfile.cmake
 
+RUN ./vcpkg/vcpkg install ffmpeg:wasm32-emscripten
+RUN ./vcpkg/vcpkg install bullet3:wasm32-emscripten
 
-RUN ./vcpkg/vcpkg install ffmpeg[avcodec,avdevice,avfilter,avformat,core,swresample,swscale]:wasm32-emscripten
+RUN ./vcpkg/vcpkg install sqlite3:wasm32-emscripten
+RUN ./vcpkg/vcpkg install lz4:wasm32-emscripten
+RUN ./vcpkg/vcpkg install sdl2:wasm32-emscripten
+RUN ./vcpkg/vcpkg install mygui:wasm32-emscripten
+RUN ./vcpkg/vcpkg install openal-soft:wasm32-emscripten
+
+COPY patches/boost-build/portfile.cmake vcpkg/ports/boost-build/portfile.cmake
+COPY patches/boost-build/0003-fix-emscripten.patch vcpkg/ports/boost-build/0003-fix-emscripten.patch
+COPY patches/boost-modular-build-helper/boost-modular-build.cmake vcpkg/ports/boost-modular-build-helper/boost-modular-build.cmake
+COPY patches/boost-modular-build-helper/CMakeLists.txt vcpkg/ports/boost-modular-build-helper/CMakeLists.txt
+
+COPY patches/liblzma/portfile.cmake vcpkg/ports/liblzma/portfile.cmake
+RUN ./vcpkg/vcpkg install liblzma:wasm32-emscripten
+
+# CMD ./vcpkg/vcpkg install pcre:wasm32-emscripten
+
+# collada-dom deps except pcre which is problematic
+RUN ./vcpkg/vcpkg install \
+    boost-filesystem:wasm32-emscripten \
+    boost-system:wasm32-emscripten \
+    libxml2:wasm32-emscripten \
+    minizip:wasm32-emscripten \
+    uriparser:wasm32-emscripten \
+    zlib:wasm32-emscripten
+
+RUN ./vcpkg/vcpkg install libpng:wasm32-emscripten
+
+COPY patches/collada-dom/vcpkg.json vcpkg/ports/collada-dom/vcpkg.json
+COPY patches/collada-dom/portfile.cmake vcpkg/ports/collada-dom/portfile.cmake
+COPY patches/collada-dom/fix-emscripten.patch vcpkg/ports/collada-dom/fix-emscripten.patch
+RUN ./vcpkg/vcpkg install collada-dom:wasm32-emscripten
+
+# RUN ./vcpkg/vcpkg install libjpeg:wasm32-emscripten
+COPY patches/osg/portfile.cmake vcpkg/ports/osg/portfile.cmake
+COPY patches/osg/vcpkg.json vcpkg/ports/osg/vcpkg.json
+CMD ./vcpkg/vcpkg install osg:wasm32-emscripten
+COPY overlay_ports/ ./overlay_ports/
 
 
-RUN apt-get update -y \
-    && apt-get install -y \
-        bison
+# RUN ./vcpkg/vcpkg install boost-winapi:wasm32-emscripten \
+#     boost-vcpkg-helpers:wasm32-emscripten \
+#     boost-type-traits:wasm32-emscripten \
+#     boost-throw-exception:wasm32-emscripten \
+#     boost-system:wasm32-emscripten \
+#     boost-smart-ptr:wasm32-emscripten \
+#     boost-predef:wasm32-emscripten \
+#     boost-iterator:wasm32-emscripten \
+#     boost-io:wasm32-emscripten \
+#     boost-detail:wasm32-emscripten \
+#     boost-core:wasm32-emscripten \
+#     boost-container-hash:wasm32-emscripten \
+#     boost-config:wasm32-emscripten \
+#     boost-atomic:wasm32-emscripten \
+#     boost-assert:wasm32-emscripten \
+#     boost-build \
+#     boost-modular-build-helper \
+#     vcpkg-cmake
+# CMD ./vcpkg/vcpkg install boost-filesystem:wasm32-emscripten
 
-RUN ./vcpkg/vcpkg install gettext[core]:wasm32-emscripten
-
-RUN ./vcpkg/vcpkg install fontconfig[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install freeglut[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install freetype[brotli,bzip2,core,png,zlib]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install freexl[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install gdal[core,curl,default-features,expat,geos,gif,hdf5,iconv,jpeg,lerc,libkml,libspatialite,libxml2,lzma,netcdf,openjpeg,openssl,pcre2,png,postgresql,qhull,recommended-features,sqlite3,webp,zstd]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install geos[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install getopt[core]:wasm32-emscripten
-#RUN ./vcpkg/vcpkg install gettext[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install giflib[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install gperf[core]:x64-linux
-RUN ./vcpkg/vcpkg install hdf5[core,cpp,szip,zlib]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install imath[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install jasper[core,default-features,opengl]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install json-c[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install lerc[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install libgeotiff[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install libgta[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install libiconv[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install libjpeg-turbo[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install libkml[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install liblzma[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install libpng[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install libpq[core,lz4,openssl,zlib]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install libspatialite[core,freexl,geocallbacks]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install libsquish[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install libuuid[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install libwebp[core,libwebpmux,nearlossless,simd]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install libxml2[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install luajit[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install lz4[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install minizip[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install mygui[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install netcdf-c[core,dap,hdf5,nczarr,netcdf-4,platform-default-features]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install nlohmann-json[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install nvtt[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install openal-soft[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install openexr[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install opengl[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install opengl-registry[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install openjpeg[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install openssl[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install osg[core,default-features,fontconfig,freetype,nvtt,openexr,plugins,rest-http-device]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install pcre2[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install pkgconf[core]:x64-linux
-RUN ./vcpkg/vcpkg install proj[core,net,tiff]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install pthread[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install pthreads[core]:wasm32-emscripten3
-RUN ./vcpkg/vcpkg install qhull[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install sdl2[base,core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install sdl2-image[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install sqlite3[core,tool]:x64-linux
-RUN ./vcpkg/vcpkg install sqlite3[core,rtree]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install szip[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install tiff[core,jpeg,lzma,zip]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install uriparser[core]:wasm32-emscripten
-
-RUN ./vcpkg/vcpkg install zlib[core]:wasm32-emscripten
-RUN ./vcpkg/vcpkg install zstd[core]:wasm32-emscripten
-
-CMD ./vcpkg/vcpkg install openmw:wasm32-emscripten --overlay-ports=/openmw-web/overlay_ports
+#--overlay-ports=/openmw-web/overlay_ports

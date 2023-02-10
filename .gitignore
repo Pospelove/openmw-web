@@ -1,1 +1,8 @@
 ./boost-exception
+
+#buildtrees
+osg/*.log
+osg/src
+osg/error-logs-wasm32-emscripten.txt
+osg/wasm32-emscripten.vcpkg_abi_info.txt
+wasm32-emscripten-*/

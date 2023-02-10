@@ -5,14 +5,12 @@
     "homepage": "https://openmw.org/",
     "license": "GPL-3.0",
     "dependencies": [
-      "osg",
       "sdl2",
       "mygui",
       "bullet3",
       "openal-soft",
       "ffmpeg",
       "lz4",
-      "sqlite3",
-      "luajit"
+      "sqlite3"
     ]
 }

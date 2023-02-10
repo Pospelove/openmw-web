@@ -1,0 +1,22 @@
+{
+    "name": "osg",
+    "version": "3.6.5",
+    "port-version": 18,
+    "description": "The OpenSceneGraph is an open source high performance 3D graphics toolkit.",
+    "homepage": "https://www.openscenegraph.com/",
+    "license": null,
+    "supports": "!uwp",
+    "dependencies": [
+        "libpng",
+        "collada-dom",
+        {
+            "name": "vcpkg-cmake",
+            "host": true
+        },
+        {
+            "name": "vcpkg-cmake-config",
+            "host": true
+        }
+    ],
+    "default-features": []
+}
