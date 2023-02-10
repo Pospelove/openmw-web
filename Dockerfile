@@ -56,6 +56,8 @@ COPY patches/collada-dom/portfile.cmake vcpkg/ports/collada-dom/portfile.cmake
 COPY patches/collada-dom/fix-emscripten.patch vcpkg/ports/collada-dom/fix-emscripten.patch
 RUN ./vcpkg/vcpkg install collada-dom:wasm32-emscripten
 
+#RUN ./vcpkg/vcpkg install opengl:wasm32-emscripten
+
 # RUN ./vcpkg/vcpkg install libjpeg:wasm32-emscripten
 COPY patches/osg/portfile.cmake vcpkg/ports/osg/portfile.cmake
 COPY patches/osg/vcpkg.json vcpkg/ports/osg/vcpkg.json

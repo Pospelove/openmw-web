@@ -20,6 +20,9 @@ project(openmw_web)
 # use opengl
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -s USE_WEBGL2=1")
 
+# -s LEGACY_GL_EMULATION=1 to cxx flags
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -s LEGACY_GL_EMULATION=1")
+
 find_package(Boost REQUIRED)
 
 file(GLOB_RECURSE src src/boost_hello_world/*)
