@@ -56,13 +56,26 @@ COPY patches/collada-dom/portfile.cmake vcpkg/ports/collada-dom/portfile.cmake
 COPY patches/collada-dom/fix-emscripten.patch vcpkg/ports/collada-dom/fix-emscripten.patch
 RUN ./vcpkg/vcpkg install collada-dom:wasm32-emscripten
 
-#RUN ./vcpkg/vcpkg install opengl:wasm32-emscripten
-
-# RUN ./vcpkg/vcpkg install libjpeg:wasm32-emscripten
 COPY patches/osg/portfile.cmake vcpkg/ports/osg/portfile.cmake
 COPY patches/osg/vcpkg.json vcpkg/ports/osg/vcpkg.json
 
 RUN ./vcpkg/vcpkg install osg:wasm32-emscripten
+
+RUN ./vcpkg/vcpkg install boost-iostreams:wasm32-emscripten
+RUN ./vcpkg/vcpkg install boost-program-options:wasm32-emscripten
+
+RUN ./vcpkg/vcpkg remove mygui:wasm32-emscripten
+COPY patches/mygui/portfile.cmake vcpkg/ports/mygui/portfile.cmake
+COPY patches/mygui/vcpkg.json vcpkg/ports/mygui/vcpkg.json
+RUN ./vcpkg/vcpkg install mygui[opengles]:wasm32-emscripten
+
+RUN ./vcpkg/vcpkg install lua:wasm32-emscripten
+
+RUN ./vcpkg/vcpkg install recast:wasm32-emscripten
+
+COPY overlay_ports/ ./overlay_ports/
+
+CMD ./vcpkg/vcpkg install openmw:wasm32-emscripten --overlay-ports=/openmw-web/overlay_ports
 
 # COPY CMakeLists.txt CMakeLists.txt
 # COPY src src
