@@ -73,6 +73,9 @@ RUN ./vcpkg/vcpkg install lua:wasm32-emscripten
 
 RUN ./vcpkg/vcpkg install recast:wasm32-emscripten
 
+# TODO: get this to work:
+RUN ./vcpkg/vcpkg install icu:wasm32-emscripten
+
 COPY overlay_ports/ ./overlay_ports/
 
 CMD ./vcpkg/vcpkg install openmw:wasm32-emscripten --overlay-ports=/openmw-web/overlay_ports
