@@ -62,12 +62,16 @@ RUN ./vcpkg/vcpkg install collada-dom:wasm32-emscripten
 COPY patches/osg/portfile.cmake vcpkg/ports/osg/portfile.cmake
 COPY patches/osg/vcpkg.json vcpkg/ports/osg/vcpkg.json
 
-COPY CMakeLists.txt CMakeLists.txt
-COPY src src
-RUN mkdir build \
-    && cd build \
-    && cmake .. \
-    && cmake --build .
+RUN ./vcpkg/vcpkg install osg:wasm32-emscripten
+
+# COPY CMakeLists.txt CMakeLists.txt
+# COPY src src
+# RUN mkdir build \
+#     && cd build \
+#     && cmake .. \
+#     && cmake --build .
+
+# CMD npx http-server build
 
 #CMD ./vcpkg/vcpkg install osg:wasm32-emscripten
 #COPY overlay_ports/ ./overlay_ports/
