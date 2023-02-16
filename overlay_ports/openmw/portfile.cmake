@@ -9,7 +9,6 @@ vcpkg_from_github(
 file(WRITE ${SOURCE_PATH}/cmake/CheckBulletPrecision.cmake "set(HAS_DOUBLE_PRECISION_BULLET \"1\")")
 
 file(COPY ${CMAKE_CURRENT_LIST_DIR}/FindMyGUI.cmake DESTINATION ${SOURCE_PATH}/cmake)
-#file(COPY ${CMAKE_CURRENT_LIST_DIR}/FindRecastNavigation.cmake DESTINATION ${SOURCE_PATH}/cmake)
 file(COPY ${CMAKE_CURRENT_LIST_DIR}/components/CMakeLists.txt DESTINATION ${SOURCE_PATH}/components)
 
 
