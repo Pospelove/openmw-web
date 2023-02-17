@@ -3,7 +3,7 @@ docker run -v $(pwd)/boost-exception:/openmw-web/vcpkg/buildtrees/boost-exceptio
 docker run --rm -v $(pwd)/boost-filesystem:/openmw-web/vcpkg/buildtrees/boost-filesystem/ openmwweb
 docker run --rm -v $(pwd)/osg:/openmw-web/vcpkg/buildtrees/osg/ openmwweb
 docker run --rm -v $(pwd)/openmw:/openmw-web/vcpkg/buildtrees/openmw/ openmwweb
-
+docker run --rm -v $(pwd)/icu:/openmw-web/vcpkg/buildtrees/icu/ openmwweb
 
 # to prove that under Emscripten lib prefix is still "lib" and suffix is ".a"
 docker run openmwweb ls vcpkg/installed/wasm32-emscripten/lib
