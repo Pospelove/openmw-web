@@ -1,8 +1,8 @@
 vcpkg_from_github(
 	OUT_SOURCE_PATH SOURCE_PATH
-	REPO OpenMW/openmw
-	REF 18d488d968c3c8039d7c116e93e455c7649f3323
-	SHA512 bd437c3cbbb750d61693fec4f0fb95aeefddab1e570c4e1cca2122ebbfb94609bce7e33f3f8e8012cd2f371a4b99e9c53b3b99eb0fba6561327b9a1b6c3bad56
+	REPO Pospelove/openmw
+	REF f689fab398d07a11bc991f9164d94dcd98a85b5c
+	SHA512 b04fe47c83bc52e56e62e96307ad376938ac1f9380120d3954e54401d231b54e1b4a06f7da11bd0ecf274472ca913ce997d97d665d5f67a4160b989cd2c1cb27
 	HEAD_REF master
 )
 
@@ -22,11 +22,10 @@ vcpkg_cmake_configure(
         -DBUILD_OPENCS=OFF
         -DBUILD_WIZARD=OFF
         -Dcollada_dom_DIR=${CURRENT_INSTALLED_DIR}/share/collada-dom # TODO: fix collada-dom-config.cmake detection
-        -DOPENMW_USE_SYSTEM_ICU=ON # OFF = FetchContent (didn't work for me)
-        -DOPENMW_USE_SYSTEM_YAML_CPP=ON # uses FetchContent, TODO: use vcpkg yaml-cpp port instead
+        -DOPENMW_USE_SYSTEM_ICU=ON
+        -DOPENMW_USE_SYSTEM_YAML_CPP=ON
         -DUSE_LUAJIT=FALSE # not available in webassembly
 
-        # didn't help at all
         "-DCMAKE_CXX_FLAGS=-s USE_ICU=1"
         "-DCMAKE_EXE_LINKER_FLAGS=-s USE_ICU=1"
         "-DCMAKE_SHARED_LINKER_FLAGS=-s USE_ICU=1" # not sure if this is needed and if this is a real variable
