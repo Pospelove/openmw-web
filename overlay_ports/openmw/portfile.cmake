@@ -10,6 +10,7 @@ file(WRITE ${SOURCE_PATH}/cmake/CheckBulletPrecision.cmake "set(HAS_DOUBLE_PRECI
 
 file(COPY ${CMAKE_CURRENT_LIST_DIR}/FindMyGUI.cmake DESTINATION ${SOURCE_PATH}/cmake)
 file(COPY ${CMAKE_CURRENT_LIST_DIR}/components/CMakeLists.txt DESTINATION ${SOURCE_PATH}/components)
+file(COPY ${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt DESTINATION ${SOURCE_PATH})
 
 
 vcpkg_cmake_configure(
@@ -20,12 +21,13 @@ vcpkg_cmake_configure(
         -DBUILD_WIZARD=OFF
         -Dcollada_dom_DIR=${CURRENT_INSTALLED_DIR}/share/collada-dom # TODO: fix collada-dom-config.cmake detection
         -DOPENMW_USE_SYSTEM_ICU=ON # OFF = FetchContent (didn't work for me)
-        -DOPENMW_USE_SYSTEM_YAML_CPP=OFF # uses FetchContent, TODO: use vcpkg yaml-cpp port instead
+        -DOPENMW_USE_SYSTEM_YAML_CPP=ON # uses FetchContent, TODO: use vcpkg yaml-cpp port instead
         -DUSE_LUAJIT=FALSE # not available in webassembly
 
         # didn't help at all
-       # "-DCMAKE_EXE_LINKER_FLAGS=-s USE_ICU=1"
-       # "-DCMAKE_SHARED_LINKER_FLAGS=-s USE_ICU=1" # not sure if this is needed and if this is a real variable
+        "-DCMAKE_CXX_FLAGS=-s USE_ICU=1"
+        "-DCMAKE_EXE_LINKER_FLAGS=-s USE_ICU=1"
+        "-DCMAKE_SHARED_LINKER_FLAGS=-s USE_ICU=1" # not sure if this is needed and if this is a real variable
 )
 
 vcpkg_cmake_install()

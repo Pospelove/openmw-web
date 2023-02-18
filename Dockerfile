@@ -77,11 +77,13 @@ RUN apt-get update -y \
     && apt-get install -y \
         autoconf-archive
 RUN ./vcpkg/vcpkg install icu:x64-linux
-CMD ./vcpkg/vcpkg install icu:wasm32-emscripten
+# CMD ./vcpkg/vcpkg install icu:wasm32-emscripten
 
-# COPY overlay_ports/ ./overlay_ports/
+RUN ./vcpkg/vcpkg install yaml-cpp:wasm32-emscripten
 
-# CMD ./vcpkg/vcpkg install openmw:wasm32-emscripten --overlay-ports=/openmw-web/overlay_ports
+COPY overlay_ports/ ./overlay_ports/
+
+CMD ./vcpkg/vcpkg install openmw:wasm32-emscripten --overlay-ports=/openmw-web/overlay_ports
 
 # COPY CMakeLists.txt CMakeLists.txt
 # COPY src src
